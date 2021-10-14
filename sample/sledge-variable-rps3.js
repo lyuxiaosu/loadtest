@@ -1,5 +1,5 @@
 const loadtest = require("../lib/loadtest");
-const configuration = require('../sample/sledge_workload_1.json');
+const configuration = require('../sample/sledge_workload_3.json');
 const execSync = require('child_process').execSync;
 
 function statusCallback(error, result, latency) {
@@ -32,7 +32,7 @@ function readBody(filename, option) {
 }
 
 const IH = '10.10.1.1';
-const IP = '10000';
+const IP = '10006';
 console.log(IH+':'+ IP);
 
 const options = {
@@ -41,7 +41,7 @@ const options = {
     // maxRequests: 10000,
     //headers: { 'Host': 'autoscale-go-1.default.example.com' },
     //method: 'POST',
-    body: readBody("/users/xiaosuGW/sledge-serverless-framework/runtime/tests/105k.jpg",'-p'),
+    body: readBody("/users/xiaosuGW/sledge-serverless-framework/runtime/tests/5k.jpg",'-p'),
     contentType: 'image/jpg',
     // starting rps can be an array or a single value
     requestsPerSecond: rps, //[20, 20, 20, 20],
