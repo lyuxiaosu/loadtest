@@ -23,11 +23,12 @@ tmp_js_fname="sledge-"$w_name"-tmp.js"
 tmp_json_fname="sledge_w_tmp.json"
 tmp_json_fake_name="sledge_"$w_name"_tmp.json"
 #calcuate total requests number
-rq=$(( $rps * $duration + 20 * 5 * $concurrency ))
+rq=$(( $rps * $duration ))
+warmup_requests=$(( 5 * 20 * $concurrency ))
 #generate .js file
 cp sample/$tmp_js_fname sample/$js_fname
 sed -i "s/$tmp_json_fake_name/$json_fname/g" sample/$js_fname
-sed -i "s/concurrency: 1/concurrency: $concurrency/g" sample/$js_fname
+sed -i "s/rps.reduce((a, b) => a + b, 0),/rps.reduce((a, b) => a + b, 0) + $warmup_requests,/g" sample/$js_fname
 
 #generate .json file
 cp sample/$tmp_json_fname sample/$json_fname
