@@ -26,7 +26,8 @@ chmod 400 \$path/id_rsa
 
 image_name="5k"
 scheduler="edf"
-rps_list=(50 60 65 68 70 72 74 76 78 80 82 84 86 88 90 92 94 96)
+#rps_list=(50 60 65 68 70 72 74 76 78 80 82 84 86 88 90 92 94 96)
+rps_list=(40 45)
 for(( i=0;i<${#rps_list[@]};i++ )) do
 	#calculate rps
 	rps=`echo "scale=2; $maximum_rps * ${rps_list[i]} / 100" | bc`
@@ -48,7 +49,7 @@ server_log_file=$server_log
 #pidstat_file="30cpucore_single1_pidstat.txt"
 ssh -o stricthostkeychecking=no -i \$path/id_rsa xiaosuGW@10.10.1.1 "\$path/start.sh \$server_log_file >/dev/null 2>&1 &"
 #ssh -o stricthostkeychecking=no -i \$path/id_rsa xiaosuGW@10.10.1.1 "\$path/start_monitor.sh \$vmstat_file \$pidstat_file"
-node sample/sledge-w3-50.js > $client_log
+node sample/sledge-$w_name-${rps_list[i]}.js > $client_log
 ssh -o stricthostkeychecking=no -i \$path/id_rsa xiaosuGW@10.10.1.1 "\$path/kill_sledge.sh"
 #ssh -o stricthostkeychecking=no -i \$path/id_rsa xiaosuGW@10.10.1.1 "\$path/stop_monitor.sh"
 

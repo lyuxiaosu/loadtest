@@ -28,6 +28,7 @@ warmup_requests=$(( 5 * 20 * $concurrency ))
 #generate .js file
 cp sample/$tmp_js_fname sample/$js_fname
 sed -i "s/$tmp_json_fake_name/$json_fname/g" sample/$js_fname
+sed -i "s/concurrency: 1,/concurrency: $concurrency,/g" sample/$js_fname
 sed -i "s/rps.reduce((a, b) => a + b, 0),/rps.reduce((a, b) => a + b, 0) + $warmup_requests,/g" sample/$js_fname
 
 #generate .json file
