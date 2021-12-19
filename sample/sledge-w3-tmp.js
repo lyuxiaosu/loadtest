@@ -32,7 +32,7 @@ function readBody(filename, option) {
 }
 
 const IH = '10.10.1.1';
-const IP = '10006';
+const IP = '10000';
 console.log(IH+':'+ IP);
 
 const options = {
