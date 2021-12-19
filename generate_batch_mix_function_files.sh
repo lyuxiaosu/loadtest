@@ -14,7 +14,7 @@ duration=$1
 
 
 image_name="5k"
-scheduler="edf-disable"
+scheduler="srsf-disable"
 
 w1_rps=46
 w2_rps=23

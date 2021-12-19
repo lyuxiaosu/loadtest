@@ -26,8 +26,8 @@ chmod 400 \$path/id_rsa
 
 image_name="5k"
 scheduler="edf"
-#rps_list=(50 60 65 68 70 72 74 76 78 80 82 84 86 88 90 92 94 96)
-rps_list=(40 45)
+rps_list=(50 60 65 68 70 72 74 76 78 80 82 84 86 88 90 92 94 96)
+#rps_list=(40 45)
 for(( i=0;i<${#rps_list[@]};i++ )) do
 	#calculate rps
 	rps=`echo "scale=2; $maximum_rps * ${rps_list[i]} / 100" | bc`

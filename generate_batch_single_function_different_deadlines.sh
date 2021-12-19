@@ -16,8 +16,7 @@ max_rps=$2
 duration=$3
 
 
-image_name="5k"
-scheduler="srsf"
+scheduler="edf-10m"
 
 w1_rps_f=`echo "scale=2; $max_rps * 0.33" | bc`
 int_w1_rps=`echo $w1_rps_f | awk '{print int($1+0.5)}'`
