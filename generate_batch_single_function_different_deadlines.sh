@@ -65,17 +65,17 @@ EOF
 
 	#$(( $rps * $duration ))
 	echo $int_rps_w1, $int_w1_concurrency
-	js_file_w1=`./generate_test_files.sh $func_name $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
+	js_file_w1=`./generate_test_files.sh $func_name_index $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
 	client_log_w1="single-different-deadlines_"$scheduler"_"$func_name"_"${rps_list[i]}".txt"
 
 	new_func_name_idx=`echo "$func_name_index + 4" | bc`
 	new_func_name="w"$new_func_name_idx
-	js_file_w2=`./generate_test_files.sh $new_func_name $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
+	js_file_w2=`./generate_test_files.sh $new_func_name_idx $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
 	client_log_w2="single-different-deadlines_"$scheduler"_"$new_func_name"_"${rps_list[i]}".txt"
 
 	new_func_name_idx=`echo "$func_name_index + 8" | bc`
 	new_func_name="w"$new_func_name_idx
-	js_file_w3=`./generate_test_files.sh $new_func_name $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
+	js_file_w3=`./generate_test_files.sh $new_func_name_idx $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
         client_log_w3="single-different-deadlines_"$scheduler"_"$new_func_name"_"${rps_list[i]}".txt"
 
 
