@@ -10,7 +10,6 @@ if [ $# != 5 ] ; then
 fi
 
 w_index=$1
-echo "w_index is --------------------- $w_index"
 w_name="w"$w_index
 rps=$2
 duration=$3
