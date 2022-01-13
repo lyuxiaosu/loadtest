@@ -33,6 +33,12 @@ int_w3_rps=`echo $w3_rps_f | awk '{print int($1+0.5)}'`
 w4_rps_f=`echo "scale=2; $w4_rps * 0.33" | bc`
 int_w4_rps=`echo $w4_rps_f | awk '{print int($1+0.5)}'`
 
+rm -rf one_shoot.sh
+touch one_shoot.sh
+chmod +x one_shoot.sh
+cat > one_shoot.sh << EOF
+#!/bin/bash
+EOF
 
 #rps_list=(50 60 65 68 70 72 74 76 78 80 82 84 86 88 90 92 94 96)
 rps_list=(64 70 74 78 80 82 84 86 88 90 92 94 96 98 100)
@@ -41,6 +47,10 @@ for(( i=0;i<${#rps_list[@]};i++ )) do
 	server_log="mix_"$scheduler"_"${rps_list[i]}".log"
 	new_test="new_test_"${rps_list[i]}".sh"
 	echo $new_test
+	cat >> one_shoot.sh << EOF
+./$new_test
+EOF
+
 	touch $new_test
 	chmod +x $new_test
 	cat > $new_test << EOF
