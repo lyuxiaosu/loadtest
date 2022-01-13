@@ -14,12 +14,12 @@ duration=$1
 
 
 image_name="5k"
-scheduler="srsf-disable"
+scheduler="edf"
 
-w1_rps=46
-w2_rps=23
-w3_rps=277
-w4_rps=115
+w1_rps=70
+w2_rps=35
+w3_rps=421
+w4_rps=175
 
 w1_rps_f=`echo "scale=2; $w1_rps * 0.33" | bc`
 int_w1_rps=`echo $w1_rps_f | awk '{print int($1+0.5)}'`
@@ -48,7 +48,7 @@ for(( i=0;i<${#rps_list[@]};i++ )) do
 path="/users/xiaosuGW/sledge-serverless-framework/runtime/tests"
 chmod 400 \$path/id_rsa
 
-ssh -o stricthostkeychecking=no -i \$path/id_rsa xiaosuGW@10.10.1.1 "\$path/start.sh $server_log >/dev/null 2>&1 &"
+ssh -o stricthostkeychecking=no -i \$path/id_rsa xiaosuGW@10.10.1.1 "\$path/start-edf.sh $server_log >/dev/null 2>&1 &"
 
 EOF
 
@@ -66,13 +66,13 @@ EOF
 
 	#$(( $rps * $duration ))
 	echo $int_rps_w1, $int_w1_concurrency
-	js_file_w1=`./generate_test_files.sh w1 $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
+	js_file_w1=`./generate_test_files.sh 1 $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
 	client_log_w1="mix_"$scheduler"_w1_"${rps_list[i]}".txt"
 
-	js_file_w5=`./generate_test_files.sh w5 $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
+	js_file_w5=`./generate_test_files.sh 5 $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
 	client_log_w5="mix_"$scheduler"_w5_"${rps_list[i]}".txt"
 
-	js_file_w9=`./generate_test_files.sh w9 $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
+	js_file_w9=`./generate_test_files.sh 9 $int_rps_w1 $duration $int_w1_concurrency ${rps_list[i]}`
         client_log_w9="mix_"$scheduler"_w9_"${rps_list[i]}".txt"
 
 	
@@ -89,15 +89,15 @@ EOF
 
         #$(( $rps * $duration ))
         echo $int_rps_w2, $int_w2_concurrency
-        js_file_w2=`./generate_test_files.sh w2 $int_rps_w2 $duration $int_w2_concurrency ${rps_list[i]}`
+        js_file_w2=`./generate_test_files.sh 2 $int_rps_w2 $duration $int_w2_concurrency ${rps_list[i]}`
         #echo ${rps_list[i]};
         client_log_w2="mix_"$scheduler"_w2_"${rps_list[i]}".txt"
 
-	js_file_w6=`./generate_test_files.sh w6 $int_rps_w2 $duration $int_w2_concurrency ${rps_list[i]}`
+	js_file_w6=`./generate_test_files.sh 6 $int_rps_w2 $duration $int_w2_concurrency ${rps_list[i]}`
         #echo ${rps_list[i]};
         client_log_w6="mix_"$scheduler"_w6_"${rps_list[i]}".txt"
 
-	js_file_w10=`./generate_test_files.sh w10 $int_rps_w2 $duration $int_w2_concurrency ${rps_list[i]}`
+	js_file_w10=`./generate_test_files.sh 10 $int_rps_w2 $duration $int_w2_concurrency ${rps_list[i]}`
         #echo ${rps_list[i]};
         client_log_w10="mix_"$scheduler"_w10_"${rps_list[i]}".txt"
 
@@ -115,15 +115,15 @@ EOF
 
         #$(( $rps * $duration ))
         echo $int_rps_w3, $int_w3_concurrency
-        js_file_w3=`./generate_test_files.sh w3 $int_rps_w3 $duration $int_w3_concurrency ${rps_list[i]}`
+        js_file_w3=`./generate_test_files.sh 3 $int_rps_w3 $duration $int_w3_concurrency ${rps_list[i]}`
         #echo ${rps_list[i]};
         client_log_w3="mix_"$scheduler"_w3_"${rps_list[i]}".txt"
 
-	js_file_w7=`./generate_test_files.sh w7 $int_rps_w3 $duration $int_w3_concurrency ${rps_list[i]}`
+	js_file_w7=`./generate_test_files.sh 7 $int_rps_w3 $duration $int_w3_concurrency ${rps_list[i]}`
         #echo ${rps_list[i]};
         client_log_w7="mix_"$scheduler"_w7_"${rps_list[i]}".txt"
 
-	js_file_w11=`./generate_test_files.sh w11 $int_rps_w3 $duration $int_w3_concurrency ${rps_list[i]}`
+	js_file_w11=`./generate_test_files.sh 11 $int_rps_w3 $duration $int_w3_concurrency ${rps_list[i]}`
         #echo ${rps_list[i]};
         client_log_w11="mix_"$scheduler"_w11_"${rps_list[i]}".txt"
 
@@ -140,15 +140,15 @@ EOF
 
         #$(( $rps * $duration ))
         echo $int_rps_w4, $int_w4_concurrency
-        js_file_w4=`./generate_test_files.sh w4 $int_rps_w4 $duration $int_w4_concurrency ${rps_list[i]}`
+        js_file_w4=`./generate_test_files.sh 4 $int_rps_w4 $duration $int_w4_concurrency ${rps_list[i]}`
         #echo ${rps_list[i]};
         client_log_w4="mix_"$scheduler"_w4_"${rps_list[i]}".txt"
 
-	js_file_w8=`./generate_test_files.sh w8 $int_rps_w4 $duration $int_w4_concurrency ${rps_list[i]}`
+	js_file_w8=`./generate_test_files.sh 8 $int_rps_w4 $duration $int_w4_concurrency ${rps_list[i]}`
         #echo ${rps_list[i]};
         client_log_w8="mix_"$scheduler"_w8_"${rps_list[i]}".txt"
 
-	js_file_w12=`./generate_test_files.sh w12 $int_rps_w4 $duration $int_w4_concurrency ${rps_list[i]}`
+	js_file_w12=`./generate_test_files.sh 12 $int_rps_w4 $duration $int_w4_concurrency ${rps_list[i]}`
         #echo ${rps_list[i]};
         client_log_w12="mix_"$scheduler"_w12_"${rps_list[i]}".txt"
 
