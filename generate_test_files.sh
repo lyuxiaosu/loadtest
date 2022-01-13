@@ -17,6 +17,10 @@ concurrency=$4
 percentage=$5
 
 tmp_index=$(($w_index%4))
+if [ $tmp_index -eq 0 ];
+    then
+        tmp_index=4		
+fi
 
 #The name of the target json file
 json_fname="sledge_"$w_name"_"$percentage".json"
