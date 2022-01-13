@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function usage {
-        echo "$0 [workload name] [maximum rps] [duration(s)] "
+        echo "$0 [workload index] [maximum rps] [duration(s)] "
         exit 1
 }
 
@@ -10,7 +10,8 @@ if [ $# != 3 ] ; then
         exit 1;
 fi
 
-w_name=$1
+w_index=$1
+w_name="w"$w_index
 maximum_rps=$2
 duration=$3
 
@@ -37,7 +38,7 @@ for(( i=0;i<${#rps_list[@]};i++ )) do
 	int_concurrency=`echo $concurrency | awk '{print int($1+0.5)}'`
 	#$(( $rps * $duration ))
 	echo $int_rps, $int_concurrency
-	./generate_test_files.sh $w_name $int_rps $duration $int_concurrency ${rps_list[i]}
+	./generate_test_files.sh $w_index $int_rps $duration $int_concurrency ${rps_list[i]}
 	#echo ${rps_list[i]};
 	client_log=$image_name"_"$scheduler"_"${rps_list[i]}".txt"
 	server_log=$image_name"_"$scheduler"_"${rps_list[i]}".log"
