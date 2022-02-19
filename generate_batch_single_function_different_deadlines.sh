@@ -16,7 +16,7 @@ max_rps=$2
 duration=$3
 
 
-scheduler="edf-10m"
+scheduler="edf"
 
 w1_rps_f=`echo "scale=2; $max_rps * 0.33" | bc`
 int_w1_rps=`echo $w1_rps_f | awk '{print int($1+0.5)}'`
@@ -47,7 +47,7 @@ EOF
 path="/users/xiaosuGW/sledge-serverless-framework/runtime/tests"
 chmod 400 \$path/id_rsa
 
-ssh -o stricthostkeychecking=no -i \$path/id_rsa xiaosuGW@10.10.1.1 "\$path/start.sh $server_log >/dev/null 2>&1 &"
+ssh -o stricthostkeychecking=no -i \$path/id_rsa xiaosuGW@10.10.1.1 "\$path/start-edf.sh $server_log >/dev/null 2>&1 &"
 
 EOF
 

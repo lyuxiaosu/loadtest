@@ -16,10 +16,10 @@ duration=$1
 image_name="5k"
 scheduler="edf"
 
-w1_rps=70
-w2_rps=35
-w3_rps=421
-w4_rps=175
+w1_rps=72
+w2_rps=36
+w3_rps=430
+w4_rps=179
 
 w1_rps_f=`echo "scale=2; $w1_rps * 0.33" | bc`
 int_w1_rps=`echo $w1_rps_f | awk '{print int($1+0.5)}'`
@@ -41,7 +41,7 @@ cat > one_shoot.sh << EOF
 EOF
 
 #rps_list=(50 60 65 68 70 72 74 76 78 80 82 84 86 88 90 92 94 96)
-rps_list=(64 70 74 78 80 82 84 86 88 90 92 94 96 98 100)
+rps_list=(50 64 70 74 78 80 82 84 86 88 90 92 94 96 98 100)
 for(( i=0;i<${#rps_list[@]};i++ )) do
 
 	server_log="mix_"$scheduler"_"${rps_list[i]}".log"
